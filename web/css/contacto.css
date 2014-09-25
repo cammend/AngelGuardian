@@ -1,0 +1,40 @@
+form{
+	background: rgba(50,50,50,0.5);
+	display: inline-block;
+	width: 600px;
+	border-radius: 5px;
+	margin-top: 30px;
+}
+
+form label{
+	display: inline-block;
+	padding: 1px;
+	width: 200px;
+	font-size: 20px;
+}
+
+form input{
+	font-size: 20px;
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#mensaje{
+	text-align: center;
+	display: block;
+}
+
+textarea{
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#env{
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#cont-env{
+	display: block;
+	text-align: center;
+}

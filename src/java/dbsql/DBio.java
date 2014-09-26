@@ -20,6 +20,7 @@ public class DBio {
     public final int SESSION_ENTIDAD = 2;
     public final String ADMINISTRADOR = "Admin";
     public final String NORMAL = "Normal";
+    OperacionesAUX a = new OperacionesAUX();
     
     private Conexion conect = new Conexion();
     private Connection conexion = null;
@@ -214,5 +215,31 @@ public class DBio {
             ex.printStackTrace();
         }
     }
+    
+    //Estos son mis metodos y manda a llamar los otros metodos de la clase OperacionesAUX
+    
+     public void ingresarPiloto (String dpi, String Nombre, String ApellidoP, String ApellidoM, String CodigoP, String Genero, String Celular, String Domicilio){
+               a.PilotoAngel(dpi, Nombre, ApellidoP, ApellidoM, CodigoP, Genero);
+               a.TelP(CodigoP, Celular, Domicilio);
+                    }      
+
+     public void UsuarioAngel(String dpi, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password,String CodigoUA, String Genero,String TipoUser,String Celular, String Domicilio){
+         
+        a.UsuarioAng(dpi, Nombre, ApellidoP, ApellidoM, Alias, Password, CodigoUA, Genero, TipoUser); 
+         a.TelUA(CodigoUA, Celular, Domicilio);
+         
+     }                      
+       
+       public void NuevaEntidad(String CodigoE, String Nombre,String Departamento,String Municipio,String Colonia,String Barrio,String Cacerío){
+           
+           a.Entidad(CodigoE, Nombre);
+           a.DireccionE(CodigoE, Departamento, Municipio, Colonia, Barrio, Cacerío);
+       }
+        
+    
+    
+    
+    
+    
 }
 

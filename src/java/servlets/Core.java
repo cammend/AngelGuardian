@@ -49,6 +49,8 @@ public class Core extends HttpServlet {
             url = "/SolicitudesPendientesJsp.jsp";
         }else if( userPath.equals("/org/entidades/top5")){
             url = "/top5.jsp";
+        }else if( userPath.equals("/org/user/nuevo")){
+            url = "NuevoAngel.jsp";
         }
         
         if( url != null ){

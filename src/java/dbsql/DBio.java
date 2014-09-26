@@ -20,7 +20,7 @@ public class DBio {
     public final int SESSION_ENTIDAD = 2;
     public final String ADMINISTRADOR = "Admin";
     public final String NORMAL = "Normal";
-    OperacionesAUX a = new OperacionesAUX();
+    OperacionesAUX a;
     
     private Conexion conect = new Conexion();
     private Connection conexion = null;
@@ -37,6 +37,7 @@ public class DBio {
        conexion = conect.gestionarConexion();
        if( conexion != null ){
             try{
+                a = new OperacionesAUX(conexion);
                 declaracion = conexion.createStatement();
             }catch(Exception ex){
                 ex.printStackTrace();

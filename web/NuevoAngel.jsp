@@ -5,7 +5,21 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%//este codigo es para que solo se acceda a esta pagina si ya se coloco el user y pass
+HttpSession sesion = request.getSession();
+if( sesion.getAttribute("TipoSesion") != null ){
+    if( session.getAttribute("TipoSesion").equals("UsuarioEntidad") ){
+%>
+        <jsp:forward page="/entidad" />
+<%
+    }
+}else{
+%>
+     <jsp:forward page="/login" />
+<%
+}
+%>
+<<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,7 +27,16 @@
     </head>
     <body>
         
-         <form action = "NuevoAngel" method="post">  
+        <%
+        //aca donde dice action pones la direccion de la pagina que va a procesar 
+        //los datos llegados del formulario y los va a ingresar a la base de datos!.
+        //entonces le voy a poner la direccion /org/user/nuevo/procesando pa que se vea bonito, jaja
+        //pero esta pagina no existe!!, por eso es necesaria mapear esta direccion hacia
+        //tu servlet que procesa la info. este mapeo se hace en el archivo web.xml o
+        //directamente en el servlet. en este caso como lo tenes en tu servlet lo voy
+        //a modificar ahi.
+        %>
+         <form action = "/org/user/nuevo/procesando" method="post">  
             <table >
                 <tr >
                      <h1>Bienvenido! Ingrese Una Nuevo Usuario Angel </h1>   </td> 

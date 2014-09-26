@@ -52,6 +52,10 @@
         <servlet-name>Core</servlet-name>
         <url-pattern>/org/solicitudes/pendientes</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Core</servlet-name>
+        <url-pattern>/org/user/nuevo</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

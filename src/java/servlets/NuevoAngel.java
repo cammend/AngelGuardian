@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author user
  */
-@WebServlet(name = "NuevoAngel", urlPatterns = {"/NuevoAngel"})
+//aqui modifique la url para que cuando se acceda desde el navegador venga hacia
+//este servlet
+@WebServlet(name = "NuevoAngel", urlPatterns = {"/org/user/nuevo/procesando"})
 public class NuevoAngel extends HttpServlet {
 
     /**

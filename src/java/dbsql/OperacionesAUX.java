@@ -2,7 +2,6 @@
 package dbsql;
 import driver.Conexion;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,11 +14,11 @@ public class OperacionesAUX {
     private ResultSet rs = null; 
     private String query = null;
     
-    Conexion con = new Conexion();
+    //Conexion con = new Conexion();
     
-    public OperacionesAUX(){
+    public OperacionesAUX(Connection con){
     
-        conex = con.getConexion();
+        conex = con;
         try {
             consulta = conex.createStatement();
         } catch (SQLException ex) {

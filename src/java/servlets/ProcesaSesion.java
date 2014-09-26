@@ -52,7 +52,7 @@ public class ProcesaSesion extends HttpServlet {
                 sesionUsuario.setAttribute("TipoUsuario", "Normal");
             }
             try{
-                out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel/org\">");
+                out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/AngelGuardian/org\">");
             }catch(Exception ex){
                 ex.printStackTrace();
             }
@@ -65,13 +65,13 @@ public class ProcesaSesion extends HttpServlet {
             }else{
                 sesionUsuario.setAttribute("TipoUsuario", "Normal");
             }
-            out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel/entidad\">");
+            out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/AngelGuardian/entidad\">");
         }else{//si hay fallo en usuario o contraseña
             if( dbio.getError() != null ){
                 error = dbio.getError();
             }
             sesionUsuario.setAttribute("error", error);
-            out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel/login\">");
+            out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/AngelGuardian/login\">");
         }
         
         try {

@@ -12,15 +12,24 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <input type ="button" onclick ="initialize()" value =" Mostrar Mapa">
         <div id="map" style ="width: 500px; height: 400px;"></div>
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-        <script>
-               
-                
-        </script>
+        
         <script type="text/javascript">
-                      
+            var info = "";
+            <%
+            //aca llamas a tus métodos para leer info de la db. (Ejemplo)
+            //la variable info existe en javascript y observá como le doy un valor
+            //esto se hace con java.
+            //la linea de abajo pone sol siguiente: info = "Hola estoy en peten...!"
+            out.print(" info = \"Hola estoy en petén Fock Yeahh!\" "); //Este es un ejemplo sin llamar a un método.
+            %>
+                     
+            //cargar el metodo initialize al cargar la página!
+            window.onload = function(){
+                initialize();
+            }
+            
             function initialize() {
                 var imagen = new google.maps.MarkerImage(
                         'http://www.chistes-groseros.com/wp-content/uploads/2014/09/Borracho-50x50.gif',
@@ -49,7 +58,7 @@
                     map.setZoom(7);
                     map.setCenter(marcadorI.getPosition());
                     var infowindow = new google.maps.InfoWindow({
-                        content: 'Hola, <div>¡estoy en Izabal!'
+                        content: info
                     });
                     infowindow.open(map, marcadorI);
                 });
@@ -83,7 +92,6 @@
                 });
 
             }
-
         </script>
     </body>
 </html>

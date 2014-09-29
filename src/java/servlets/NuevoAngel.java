@@ -1,17 +1,25 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlets;
 
+import dbsql.DBio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
- * @author cammend
+ * @author user
  */
-public class Core extends HttpServlet {
+@WebServlet(name = "NuevoAngel", urlPatterns = {"/NuevoAngel"})
+public class NuevoAngel extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -27,55 +35,32 @@ public class Core extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
-        String userPath = request.getServletPath();
-        String url = null;
-        
-        if( userPath.equals("/contacto") ){
-            url = "Contacto.jsp";
-        }else if( userPath.equals("/login") ){
-            url = "InicioSesion.jsp";
-        }else if( userPath.equals("/org") ){
-            url = "paginaPrincipalAngel.jsp";
-        }else if( userPath.equals("/logout") ){
-            request.getSession().removeAttribute("error");
-            request.getSession().removeAttribute("TipoSesion");
-            request.getSession().removeAttribute("nombre");
-            request.getSession().invalidate();
-            out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/AngelGuardian/\">");
-        }else if( userPath.equals("/entidad") ){
-            url = "paginaPrincipalEntidad.jsp";
-        }else if( userPath.equals("/org/solicitudes/pendientes") ){
-            url = "/SolicitudesPendientesJsp.jsp";
-        }else if( userPath.equals("/org/entidades/top5")){
-            url = "/top5.jsp";
-        }
-        
-        if( url != null ){
-            try{
-                request.getRequestDispatcher(url).forward(request, response);
-            }catch(Exception ex){
-                ex.printStackTrace();
-            }
-        }
-        
-        /*
         try {
-            /*
-             * TODO output your page here. You may use following sample code.
+             DBio regis = new DBio();
+            String DPI = request.getParameter("DPI");
+            String Nombre = request.getParameter("Nombre");
+            String ApellidoP = request.getParameter("ApellidoP");
+             String ApellidoM = request.getParameter("ApellidoM");
+             String Genero = request.getParameter("Genero");
+             String Alias = request.getParameter("Alias");
+             String Password = request.getParameter("Password");
+             String TipoUser = request.getParameter("TipoUser");
+             String Celular = request.getParameter("Celular");
+             String Domicilio = request.getParameter("Domicilio");
              
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Core</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Core at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+             
+            String CodigoUA = request.getParameter("DPI");
+            
+        
+             
+             
+            regis.UsuarioAngel(DPI, Nombre, ApellidoP, ApellidoM, Alias, Password, CodigoUA, Genero, TipoUser, Celular, Domicilio);
+            
+             response.sendRedirect("index.jsp");
+            
         } finally {            
             out.close();
         }
-        */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -36,7 +36,7 @@ if( sesion.getAttribute("TipoSesion") != null ){
         //directamente en el servlet. en este caso como lo tenes en tu servlet lo voy
         //a modificar ahi.
         %>
-         <form action = "/org/user/nuevo/procesando" method="post">  
+         <form action = "nuevo/procesando" method="post">  
             <table >
                 <tr >
                      <h1>Bienvenido! Ingrese Una Nuevo Usuario Angel </h1>   </td> 

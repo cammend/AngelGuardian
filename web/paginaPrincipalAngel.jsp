@@ -55,7 +55,7 @@ if( sesion.getAttribute("TipoSesion") != null ){
                 <a href="org/entidades">Ver todas las Entidades</a>
                 <a href="org/solicitudes/pendientes">Ver solicitudes pendientes</a>
                 <a href="org/solicitudes/eliminadas">Ver solicitudes eleminadas</a>
-                <a href="/org/user/nuevo">Nuevo Usuario</a>
+                <a href="org/user/nuevo">Nuevo Usuario</a>
             </h4>
         </div>
         

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,9 +76,7 @@ public class ProcesaSesion extends HttpServlet {
         }
         
         try {
-            /*
-             * TODO output your page here. You may use following sample code.
-             */
+            //paginaError();
             
         } finally {            
             out.close();

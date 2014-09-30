@@ -42,7 +42,7 @@ public class Core extends HttpServlet {
             request.getSession().removeAttribute("TipoSesion");
             request.getSession().removeAttribute("nombre");
             request.getSession().invalidate();
-            out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/AngelGuardian/\">");
+            out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/\">");
         }else if( userPath.equals("/entidad") ){
             url = "paginaPrincipalEntidad.jsp";
         }else if( userPath.equals("/org/solicitudes/pendientes") ){
@@ -50,7 +50,7 @@ public class Core extends HttpServlet {
         }else if( userPath.equals("/org/entidades/top5")){
             url = "/top5.jsp";
         }else if( userPath.equals("/org/user/nuevo")){
-            url = "NuevoAngel.jsp";
+            url = "/NuevoAngel.jsp";
         }
         
         if( url != null ){

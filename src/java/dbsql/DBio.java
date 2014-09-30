@@ -57,7 +57,9 @@ public class DBio {
     
     public int comprobarLogin(String nombre, String pass){
         try{
+            //JOptionPane.showMessageDialog(null, "yeah");
             resultado = declaracion.executeQuery("select Password, TipoUser from UsuarioAngel where Alias='"+nombre+"'");
+            //JOptionPane.showMessageDialog(null, "yeah");
             if( resultado.next() ){
                 String password = (String)resultado.getObject(1);
                 tipoUsuario = (String)resultado.getObject(2);

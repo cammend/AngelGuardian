@@ -2,10 +2,9 @@ package dbsql;
 
 import clases.EntidadSolicitud;
 import clases.Solicitud;
+import clases.TipoUsuario;
 import driver.Conexion;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -30,6 +29,7 @@ public class DBio {
     private String nombreEntidad = null;
     private ArrayList <Solicitud> solicitudes = null;
     private Date fecha = null;
+    private CallableStatement procNuevaSol;
     
     private String error = null;
     
@@ -45,7 +45,7 @@ public class DBio {
         }
        error = conect.getError();
     }
-    
+
     public void ingresarEntidad(){
         try{
             declaracion = conect.getConexion().createStatement();
@@ -62,7 +62,8 @@ public class DBio {
             //JOptionPane.showMessageDialog(null, "yeah");
             if( resultado.next() ){
                 String password = (String)resultado.getObject(1);
-                tipoUsuario = (String)resultado.getObject(2);
+                int tipo = Integer.parseInt(String.valueOf(resultado.getObject(2)));
+                tipoUsuario = TipoUsuario.getString(tipo);
                 if( password.equals(pass) ){
                     //iniciar sesion para Usuario Angel
                     this.cerrar();
@@ -72,9 +73,10 @@ public class DBio {
                 resultado = declaracion.executeQuery("select Password, TipoUser, CodigoE from UsuarioEnt where Alias='"+nombre+"'");
                 if( resultado.next() ){
                     String password = (String)resultado.getObject(1);
-                    tipoUsuario = (String)resultado.getObject(2);
-                    String codigoE = (String)resultado.getObject(3);
-                    resultado = declaracion.executeQuery("select nombre from Entidad where CodigoE='"+codigoE+"'");
+                    int tipo = Integer.parseInt(String.valueOf(resultado.getObject(2)));
+                    tipoUsuario = TipoUsuario.getString(tipo);
+                    int codigoE = Integer.parseInt(String.valueOf(resultado.getObject(3)));
+                    resultado = declaracion.executeQuery("select nombre from Entidad where CodigoE="+codigoE);
                     if( resultado.next() ){
                         nombreEntidad = (String)resultado.getObject(1);
                     }
@@ -184,6 +186,41 @@ public class DBio {
         return temp;
     }
     
+    public boolean nuevaSolicitud(String eb_dpi, String eb_nombre, String eb_ape1, String eb_ape2,
+            String en_nombre, String en_ape, String en_tel, String cod_ue, String dep, String mun, String barrio){
+        
+        //String consulta_ebrio = "insert into Ebrio (DPI, Nombre, ApellidoP, ApellidoM) values ("+eb_dpi+",'"+eb_nombre+"','"+eb_ape1+"','"+eb_ape2+"')";
+        //String cod_ebrio = null;
+        //String consulta_encargado = "insert into EncargadoEbrio values ("+cod_ebrio+",'"+en_nombre+"','"+en_ape+"',"+en_tel+")";
+        try{
+            //primero le asignamos los parametros
+            procNuevaSol.setInt(1, Integer.parseInt(eb_dpi));
+            procNuevaSol.setString(2, eb_nombre);
+            procNuevaSol.setString(3, eb_ape1);
+            procNuevaSol.setString(4, eb_ape2);
+            procNuevaSol.setString(5, en_nombre);
+            procNuevaSol.setString(6, en_ape);
+            procNuevaSol.setInt(7, Integer.parseInt(en_tel));
+            procNuevaSol.setInt(8, Integer.parseInt(cod_ue));
+            procNuevaSol.setString(9, dep);
+            procNuevaSol.setString(10, mun);
+            procNuevaSol.setString(11, barrio);
+            procNuevaSol.registerOutParameter(12, java.sql.Types.VARCHAR);
+            //ejecutamos el procedimiento almacenado
+            procNuevaSol.execute();
+            //luego leemos el dato de salida
+            String s = procNuevaSol.getString(12);
+            if( s != "y"){
+                return false;
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,ex.getMessage());
+            ex.printStackTrace();
+        }
+        
+        return true;
+    }
+    
     public ArrayList<Solicitud> getSolicitudesPendientes(){
         procesarSolicitudesPendientes();
         return solicitudes;
@@ -214,6 +251,14 @@ public class DBio {
         }
         try{
             conect.cerrar();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    private void iniciarProcesoAlmacenado(){
+        try{
+            procNuevaSol = conexion.prepareCall("{call Nueva_Solicitud(?,?,?,?,?,?,?,?,?,?,?)");
         }catch(Exception ex){
             ex.printStackTrace();
         }

@@ -5,8 +5,22 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+HttpSession sesion = request.getSession();
+if( sesion.getAttribute("TipoSesion") != null ){
+    if( session.getAttribute("TipoSesion").equals("UsuarioAngel") ){
+%>
+        <jsp:forward page="/org" />
+<%
+    }
+}else{
+%>
+     <jsp:forward page="/login" />
+<%
+}
+%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nueva Solicitud</title>
@@ -74,7 +88,7 @@ form input{
         
         <div id="formulario">
             <div id="f">
-        <form method="post" action="registrando/solicitud" name="nueva-solicitud">
+        <form method="post" action="nueva/procesando" name="nueva-solicitud">
             <div name="datos-ebrio" class="div-form">
                 <h3>Datos de Persona en Embriaguez:</h3>
                 <label>DPI:</label>

@@ -30,6 +30,7 @@ public class DBio {
     private ArrayList <Solicitud> solicitudes = null;
     private Date fecha = null;
     private CallableStatement procNuevaSol;
+    private int UserAngel = 0;
     
     private String error = null;
     
@@ -58,11 +59,12 @@ public class DBio {
     public int comprobarLogin(String nombre, String pass){
         try{
             //JOptionPane.showMessageDialog(null, "yeah");
-            resultado = declaracion.executeQuery("select Password, TipoUser from UsuarioAngel where Alias='"+nombre+"'");
+            resultado = declaracion.executeQuery("select Password, TipoUser, CodigoUA from UsuarioAngel where Alias='"+nombre+"'");
             //JOptionPane.showMessageDialog(null, "yeah");
             if( resultado.next() ){
                 String password = (String)resultado.getObject(1);
                 int tipo = Integer.parseInt(String.valueOf(resultado.getObject(2)));
+                UserAngel = Integer.parseInt(String.valueOf(resultado.getObject(3)));
                 tipoUsuario = TipoUsuario.getString(tipo);
                 if( password.equals(pass) ){
                     //iniciar sesion para Usuario Angel
@@ -70,12 +72,13 @@ public class DBio {
                     return SESSION_ANGEL;
                 }
             }else{ //si no se encontro el usuario en UsuarioAngel se busca en UsuarioEnt
-                resultado = declaracion.executeQuery("select Password, TipoUser, CodigoE from UsuarioEnt where Alias='"+nombre+"'");
+                resultado = declaracion.executeQuery("select Password, TipoUser, CodigoE, CodigoUE from UsuarioEnt where Alias='"+nombre+"'");
                 if( resultado.next() ){
                     String password = (String)resultado.getObject(1);
                     int tipo = Integer.parseInt(String.valueOf(resultado.getObject(2)));
                     tipoUsuario = TipoUsuario.getString(tipo);
                     int codigoE = Integer.parseInt(String.valueOf(resultado.getObject(3)));
+                    UserAngel = Integer.parseInt(String.valueOf(resultado.getObject(4)));
                     resultado = declaracion.executeQuery("select nombre from Entidad where CodigoE="+codigoE);
                     if( resultado.next() ){
                         nombreEntidad = (String)resultado.getObject(1);
@@ -93,6 +96,10 @@ public class DBio {
         }
         this.cerrar();
         return 0;
+    }
+    
+    public int getCodigoUsuario(){
+        return UserAngel;
     }
     
     private void procesarSolicitudesPendientes(){
@@ -192,6 +199,7 @@ public class DBio {
         //String consulta_ebrio = "insert into Ebrio (DPI, Nombre, ApellidoP, ApellidoM) values ("+eb_dpi+",'"+eb_nombre+"','"+eb_ape1+"','"+eb_ape2+"')";
         //String cod_ebrio = null;
         //String consulta_encargado = "insert into EncargadoEbrio values ("+cod_ebrio+",'"+en_nombre+"','"+en_ape+"',"+en_tel+")";
+        iniciarProcesoAlmacenado();
         try{
             //primero le asignamos los parametros
             procNuevaSol.setInt(1, Integer.parseInt(eb_dpi));
@@ -205,17 +213,13 @@ public class DBio {
             procNuevaSol.setString(9, dep);
             procNuevaSol.setString(10, mun);
             procNuevaSol.setString(11, barrio);
-            procNuevaSol.registerOutParameter(12, java.sql.Types.VARCHAR);
             //ejecutamos el procedimiento almacenado
             procNuevaSol.execute();
             //luego leemos el dato de salida
-            String s = procNuevaSol.getString(12);
-            if( s != "y"){
-                return false;
-            }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,ex.getMessage());
             ex.printStackTrace();
+            return false;
         }
         
         return true;
@@ -266,22 +270,21 @@ public class DBio {
     
     //Estos son mis metodos y manda a llamar los otros metodos de la clase OperacionesAUX
     
-     public void ingresarPiloto (int dpi, String Nombre, String ApellidoP, String ApellidoM,  String Genero, int Celular, int Domicilio){
-               a.PilotoAngel(dpi, Nombre, ApellidoP, ApellidoM,  Genero);
-               a.TelP( Celular, Domicilio);
+     public void ingresarPiloto (String dpi, String Nombre, String ApellidoP, String ApellidoM, String CodigoP, String Genero, String Celular, String Domicilio){
+               a.PilotoAngel(dpi, Nombre, ApellidoP, ApellidoM, CodigoP, Genero);
+               a.TelP(CodigoP, Celular, Domicilio);
                     }      
 
-     public void UsuarioAngel(int dpi, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero,int TipoUser,int Celular, int Domicilio){
+     public void UsuarioAngel(String dpi, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password,String CodigoUA, String Genero,String TipoUser,String Celular, String Domicilio){
          
-        a.UsuarioAng(dpi, Nombre, ApellidoP, ApellidoM, Alias, Password,  Genero, TipoUser); 
-        
-        a.TelUA(Celular, Domicilio);
+        a.UsuarioAng(dpi, Nombre, ApellidoP, ApellidoM, Alias, Password, CodigoUA, Genero, TipoUser); 
+         a.TelUA(CodigoUA, Celular, Domicilio);
          
      }                      
        
        public void NuevaEntidad(String CodigoE, String Nombre,String Departamento,String Municipio,String Colonia,String Barrio,String Cacerío){
            
-           a.Entidad( Nombre);
+           a.Entidad(CodigoE, Nombre);
            a.DireccionE(CodigoE, Departamento, Municipio, Colonia, Barrio, Cacerío);
        }
         

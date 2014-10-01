@@ -56,6 +56,14 @@
         <servlet-name>Core</servlet-name>
         <url-pattern>/org/user/nuevo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Core</servlet-name>
+        <url-pattern>/entidad/solicitud/nueva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Core</servlet-name>
+        <url-pattern>/entidad/solicitud/nueva/procesando</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

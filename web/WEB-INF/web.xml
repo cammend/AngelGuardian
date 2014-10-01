@@ -58,6 +58,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Core</servlet-name>
+        <url-pattern>/org/user/nuevo/procesando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Core</servlet-name>
         <url-pattern>/entidad/solicitud/nueva</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

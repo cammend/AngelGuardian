@@ -199,6 +199,7 @@ public class DBio {
         //String consulta_ebrio = "insert into Ebrio (DPI, Nombre, ApellidoP, ApellidoM) values ("+eb_dpi+",'"+eb_nombre+"','"+eb_ape1+"','"+eb_ape2+"')";
         //String cod_ebrio = null;
         //String consulta_encargado = "insert into EncargadoEbrio values ("+cod_ebrio+",'"+en_nombre+"','"+en_ape+"',"+en_tel+")";
+        iniciarProcesoAlmacenado();
         try{
             //primero le asignamos los parametros
             procNuevaSol.setInt(1, Integer.parseInt(eb_dpi));
@@ -212,17 +213,13 @@ public class DBio {
             procNuevaSol.setString(9, dep);
             procNuevaSol.setString(10, mun);
             procNuevaSol.setString(11, barrio);
-            procNuevaSol.registerOutParameter(12, java.sql.Types.VARCHAR);
             //ejecutamos el procedimiento almacenado
             procNuevaSol.execute();
             //luego leemos el dato de salida
-            String s = procNuevaSol.getString(12);
-            if( s != "y"){
-                return false;
-            }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,ex.getMessage());
             ex.printStackTrace();
+            return false;
         }
         
         return true;

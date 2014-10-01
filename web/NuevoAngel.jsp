@@ -52,6 +52,16 @@ if( sesion.getAttribute("TipoSesion") != null ){
        
        } 
        
+        function validarDom(){
+       var valor = document.getElementById("Domicilio").value;
+         if( !(/^\d{8}$/.test(valor)) ) {
+             alert("Numero Invalido");
+             document.getElementById("Domicilio").focus();
+           return false;
+         }
+       
+       } 
+       
        
            
         </script>
@@ -162,7 +172,7 @@ form input{
                 <input type="text" name="Domicilio" onClick="validarNum()" required placeholder="Escriba aqui su Domicilio"/>
                 
                 <label>Tipo de Usuario:</label>
-                <select name="TipoUser">
+                <select name="TipoUser" onClick="validarDom()">
                     <option value="Admin">Admin</option>
                     <option value="Normal">Normal</option>
                 </select>

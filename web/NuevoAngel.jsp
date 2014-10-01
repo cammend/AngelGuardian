@@ -32,12 +32,27 @@ if( sesion.getAttribute("TipoSesion") != null ){
             var Pass = document.getElementById("Pass").value;
             
             if(Password == Pass){
-                alert("Contrasenas iguales");
+                alert("Contraseñas coinciden");
+               
             }else{
-                alert("Contrasenas no coinciden");
-                
-             }      
-        }    
+                alert("Contraseñas no coinciden");
+                document.getElementById("Password").focus();
+                return false;
+             }  
+             return true;
+        } 
+        
+        function validarNum(){
+       var valor = document.getElementById("Celular").value;
+         if( !(/^\d{8}$/.test(valor)) ) {
+             alert("Numero Invalido");
+             document.getElementById("Celular").focus();
+           return false;
+         }
+       
+       } 
+       
+       
            
         </script>
         
@@ -122,13 +137,13 @@ form input{
         <div id="formulario">
             <div id="f">
         
-        <form action = "nuevo/procesando" method="post" >  
+        <form action = "nuevo/procesando" method="post"  >  
          <div name="DatosAngel" class="div-form">
                 <h3>Ingresar Datos del Usuario:</h3>
                 <label>DPI:</label>
                 <input type="text" name="DPI" required placeholder="Escriba aqui su Dpi"/>
                 <label>Nombre:</label>
-                <input type="text" name="Nombre" required placeholder="Escriba aqui su Nombre"/>
+                <input type="text" name="Nombre" required   placeholder="Escriba aqui su Nombre"/>
                 <label>Apellido Paterno:</label>
                 <input type="text" name=ApellidoP" required placeholder="Escriba aqui su ApellidoP"/>
                 <label>Apellido Materno:</label>
@@ -142,9 +157,9 @@ form input{
                 <label>Repita su Password:</label>
                 <input type="Password" name="Pass" id="Pass" required placeholder="Escriba aqui su Pass" />
                 <label>Celular:</label>
-                <input type="text" name="Celular" required onClick="validacion()" placeholder="Escriba aqui su Celular"/>
+                <input type="text" name="Celular" id="Celular" required onClick="validacion()" placeholder="Escriba aqui su Celular"/>
                 <label>Domicilio:</label>
-                <input type="text" name="Domicilio" required placeholder="Escriba aqui su Domicilio"/>
+                <input type="text" name="Domicilio" onClick="validarNum()" required placeholder="Escriba aqui su Domicilio"/>
                 
                 <label>Tipo de Usuario:</label>
                 <select name="TipoUser">

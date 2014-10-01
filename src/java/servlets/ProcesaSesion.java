@@ -45,6 +45,7 @@ public class ProcesaSesion extends HttpServlet {
         DBio dbio = new DBio();//nueva instancia de la clase que maneja las consultas
         int tipoLogin = dbio.comprobarLogin(request.getParameter("nombre"), request.getParameter("pass"));
         if( tipoLogin == dbio.SESSION_ANGEL ){
+            sesionUsuario.setAttribute("Codigo",dbio.getCodigoUsuario());
             sesionUsuario.setAttribute("nombre", request.getParameter("nombre"));
             sesionUsuario.setAttribute("TipoSesion", "SesionAngel");
             if( dbio.getTipoUsuario().equals(dbio.ADMINISTRADOR) ){
@@ -58,6 +59,7 @@ public class ProcesaSesion extends HttpServlet {
                 ex.printStackTrace();
             }
         }else if( tipoLogin == dbio.SESSION_ENTIDAD ){
+            sesionUsuario.setAttribute("Codigo",dbio.getCodigoUsuario());
             sesionUsuario.setAttribute("nombre", request.getParameter("nombre"));
             sesionUsuario.setAttribute("TipoSesion", "SesionEntidad");
             sesionUsuario.setAttribute("NombreEntidad", dbio.getNombreEntidad());

@@ -22,30 +22,27 @@ public class Leer {
 
     public Leer() {
         try {
-            conex = con.getConexion();
+            conex = con.gestionarConexion();
             consulta = conex.createStatement();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    public void UsuarioAngel(){
-        String Alias;
-                String UsuAng = "Select Alias from UsuarioAngel where Nombre = 'Gerson'";
-                               
-                try{
-                    
-                    consulta = conex.createStatement();
-                    resultado = consulta.executeQuery(UsuAng);
-                    resultado.next();
-                    Alias = resultado.getString("Alias");
-                   JOptionPane.showMessageDialog(null,Alias );
-                                             
-                           
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex);
+    public String UsuarioAngel(){
+        String Alias = null;
+        String UsuAng = "select Nombre from UsuarioAngel where CodigoUA = 1";
+        try{
+            consulta = conex.createStatement();
+            resultado = consulta.executeQuery(UsuAng);
+            resultado.next();
+            Alias = resultado.getString("Nombre");
+            JOptionPane.showMessageDialog(null,Alias );
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
            ex.printStackTrace();
-        } 
+        }
+        return Alias;
     }
     
 }

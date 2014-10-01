@@ -30,6 +30,7 @@ public class DBio {
     private ArrayList <Solicitud> solicitudes = null;
     private Date fecha = null;
     private CallableStatement procNuevaSol;
+    private int UserAngel = 0;
     
     private String error = null;
     
@@ -58,11 +59,12 @@ public class DBio {
     public int comprobarLogin(String nombre, String pass){
         try{
             //JOptionPane.showMessageDialog(null, "yeah");
-            resultado = declaracion.executeQuery("select Password, TipoUser from UsuarioAngel where Alias='"+nombre+"'");
+            resultado = declaracion.executeQuery("select Password, TipoUser, CodigoUA from UsuarioAngel where Alias='"+nombre+"'");
             //JOptionPane.showMessageDialog(null, "yeah");
             if( resultado.next() ){
                 String password = (String)resultado.getObject(1);
                 int tipo = Integer.parseInt(String.valueOf(resultado.getObject(2)));
+                UserAngel = Integer.parseInt(String.valueOf(resultado.getObject(3)));
                 tipoUsuario = TipoUsuario.getString(tipo);
                 if( password.equals(pass) ){
                     //iniciar sesion para Usuario Angel
@@ -70,12 +72,13 @@ public class DBio {
                     return SESSION_ANGEL;
                 }
             }else{ //si no se encontro el usuario en UsuarioAngel se busca en UsuarioEnt
-                resultado = declaracion.executeQuery("select Password, TipoUser, CodigoE from UsuarioEnt where Alias='"+nombre+"'");
+                resultado = declaracion.executeQuery("select Password, TipoUser, CodigoE, CodigoUE from UsuarioEnt where Alias='"+nombre+"'");
                 if( resultado.next() ){
                     String password = (String)resultado.getObject(1);
                     int tipo = Integer.parseInt(String.valueOf(resultado.getObject(2)));
                     tipoUsuario = TipoUsuario.getString(tipo);
                     int codigoE = Integer.parseInt(String.valueOf(resultado.getObject(3)));
+                    UserAngel = Integer.parseInt(String.valueOf(resultado.getObject(4)));
                     resultado = declaracion.executeQuery("select nombre from Entidad where CodigoE="+codigoE);
                     if( resultado.next() ){
                         nombreEntidad = (String)resultado.getObject(1);
@@ -93,6 +96,10 @@ public class DBio {
         }
         this.cerrar();
         return 0;
+    }
+    
+    public int getCodigoUsuario(){
+        return UserAngel;
     }
     
     private void procesarSolicitudesPendientes(){

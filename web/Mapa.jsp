@@ -4,6 +4,8 @@
     Author     : Gerson pineda
 --%>
 
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="clases.Leer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +24,10 @@
             //la variable info existe en javascript y observá como le doy un valor
             //esto se hace con java.
             //la linea de abajo pone sol siguiente: info = "Hola estoy en peten...!"
-            out.print(" info = \"Hola estoy en petén Fock Yeahh!\" "); //Este es un ejemplo sin llamar a un método.
+            Leer a = new Leer();
+            String inf = a.UsuarioAngel();
+            JOptionPane.showMessageDialog(null,inf);
+            out.print(" info = \""+inf+"\""); //Este es un ejemplo sin llamar a un método.
             %>
                      
             //cargar el metodo initialize al cargar la página!

@@ -37,7 +37,9 @@ public class NuevoAngel extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
+        try{
+        
+       
              DBio regis = new DBio();
              String DPI = request.getParameter("DPI");
              String Nombre = request.getParameter("Nombre");
@@ -57,11 +59,13 @@ public class NuevoAngel extends HttpServlet {
             }catch(Exception ex){
                 ex.printStackTrace();
             }
-            
-        } finally {            
+           
+               
+            } finally {            
             out.close();
         }
     }
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

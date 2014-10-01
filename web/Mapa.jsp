@@ -4,6 +4,7 @@
     Author     : Gerson pineda
 --%>
 
+<%@page import="clases.Leer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,9 @@
         <script type="text/javascript">
             var info = "";
             <%
+            
+            
+            
             //aca llamas a tus métodos para leer info de la db. (Ejemplo)
             //la variable info existe en javascript y observá como le doy un valor
             //esto se hace con java.

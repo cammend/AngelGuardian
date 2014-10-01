@@ -39,9 +39,9 @@ public class NuevoAngel extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
              DBio regis = new DBio();
-             String DPI = request.getParameter("DPI");
-             String Nombre = request.getParameter("Nombre");
-             String ApellidoP = request.getParameter("ApellidoP");
+            String DPI = request.getParameter("DPI");
+            String Nombre = request.getParameter("Nombre");
+            String ApellidoP = request.getParameter("ApellidoP");
              String ApellidoM = request.getParameter("ApellidoM");
              String Genero = request.getParameter("Genero");
              String Alias = request.getParameter("Alias");
@@ -49,10 +49,16 @@ public class NuevoAngel extends HttpServlet {
              String TipoUser = request.getParameter("TipoUser");
              String Celular = request.getParameter("Celular");
              String Domicilio = request.getParameter("Domicilio");
-           
-            regis.UsuarioAngel((Integer.parseInt(DPI)), Nombre, ApellidoP, ApellidoM, Alias, Password, Genero,(Integer.parseInt(TipoUser)) , (Integer.parseInt(Celular)),(Integer.parseInt(Domicilio)));
+             
+             
+            String CodigoUA = request.getParameter("DPI");
             
-             response.sendRedirect("paginaPrincipalAngel.jsp");
+        
+             
+             
+            regis.UsuarioAngel(DPI, Nombre, ApellidoP, ApellidoM, Alias, Password, CodigoUA, Genero, TipoUser, Celular, Domicilio);
+            
+             response.sendRedirect("index.jsp");
             
         } finally {            
             out.close();

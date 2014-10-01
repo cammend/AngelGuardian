@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OperacionesAUX {
-    private Connection conex= null;
+     private Connection conex= null;
     private Statement consulta = null;
     private ResultSet rs = null; 
     private String query = null;
@@ -27,8 +27,8 @@ public class OperacionesAUX {
 }
     
   
-    public void TelP ( int Celular, int Domicilio){
-                query = "Insert Into TelP values ("+Celular+","+Domicilio+")";
+    public void TelP (String CodigoP, String Celular, String Domicilio){
+                query = "Insert Into TelP values ('"+CodigoP+"','"+Celular+"','"+Domicilio+"')";
                try{
                   consulta.executeUpdate(query);
                  
@@ -38,9 +38,9 @@ public class OperacionesAUX {
 
 }
     
-  public void PilotoAngel (int dpi, String Nombre, String ApellidoP, String ApellidoM, String Genero){            
+  public void PilotoAngel (String dpi, String Nombre, String ApellidoP, String ApellidoM, String CodigoP, String Genero){            
          
-              query = "Insert Into PilotoAngel values ("+dpi+",'"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+Genero+"')";
+              query = "Insert Into PilotoAngel values ('"+dpi+"','"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+CodigoP+"','"+Genero+"')";
               
             try{
                 consulta.executeUpdate(query);
@@ -51,9 +51,9 @@ public class OperacionesAUX {
         }  
     
     
-   public void Entidad ( String Nombre){            
+   public void Entidad (String CodigoE, String Nombre){            
          
-              query = "Insert Into Entidad values ('"+Nombre+"')";
+              query = "Insert Into Entidad values ('"+CodigoE+"','"+Nombre+"')";
               
             try{
                 consulta.executeUpdate(query);
@@ -77,8 +77,8 @@ public class OperacionesAUX {
             }
         }   
     
-   public void UsuarioAng (int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero,int TipoUser){
-   String query = "Insert Into UsuarioAngel( DPI, Nombre, ApellidoP, ApellidoM, Alias, Password, Genero,TipoUser) values ("+DPI+",'"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+Alias+"','"+Password+"','"+Genero+"',"+TipoUser+")";
+   public void UsuarioAng (String DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password,String CodigoUA, String Genero,String TipoUser){
+            String query = "Insert Into UsuarioAngel values ('"+DPI+"','"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+Alias+"','"+Password+"','"+CodigoUA+"','"+Genero+"','"+TipoUser+"')";
             try{
                 consulta.executeUpdate(query);
                 
@@ -87,8 +87,8 @@ public class OperacionesAUX {
             }
         }
    
-    public void TelUA ( int Celular, int Domicilio){
-                query = "Insert Into TelUA values ("+Celular+","+Domicilio+")";
+    public void TelUA (String CodigoUA, String Celular, String Domicilio){
+                query = "Insert Into TelUA values ('"+CodigoUA+"','"+Celular+"','"+Domicilio+"')";
                try{
                   consulta.executeUpdate(query);
                             } catch(Exception e){

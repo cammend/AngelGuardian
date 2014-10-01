@@ -52,7 +52,11 @@ public class NuevoAngel extends HttpServlet {
            
             regis.UsuarioAngel((Integer.parseInt(DPI)), Nombre, ApellidoP, ApellidoM, Alias, Password, Genero,(Integer.parseInt(TipoUser)) , (Integer.parseInt(Celular)),(Integer.parseInt(Domicilio)));
             
-             response.sendRedirect("paginaPrincipalAngel.jsp");
+              try{
+                out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/org\">");
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
             
         } finally {            
             out.close();

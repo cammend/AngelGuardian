@@ -49,7 +49,27 @@ if( sesion.getAttribute("TipoSesion") != null ){
              document.getElementById("Celular").focus();
            return false;
          }
+       return true; 
+       } 
        
+        function validarDom(){
+       var valor = document.getElementById("Domicilio").value;
+         if( !(/^\d{8}$/.test(valor)) ) {
+             alert("Numero Invalido");
+             document.getElementById("Domicilio").focus();
+           return false;
+         }
+         return true; 
+       } 
+       
+        function validarDpi(){
+       var valor = document.getElementById("DPI").value;
+         if( !(/^\d{8}$/.test(valor)) ) {
+             alert("Numero Invalido");
+             document.getElementById("DPI").focus();
+           return false;
+         }
+       return true; 
        } 
        
        
@@ -141,9 +161,9 @@ form input{
          <div name="DatosAngel" class="div-form">
                 <h3>Ingresar Datos del Usuario:</h3>
                 <label>DPI:</label>
-                <input type="text" name="DPI" required placeholder="Escriba aqui su Dpi"/>
+                <input type="text" name="DPI" id="DPI"  required placeholder="Escriba aqui su Dpi"/>
                 <label>Nombre:</label>
-                <input type="text" name="Nombre" required   placeholder="Escriba aqui su Nombre"/>
+                <input type="text" name="Nombre" required onClick="validarDpi()"  placeholder="Escriba aqui su Nombre"/>
                 <label>Apellido Paterno:</label>
                 <input type="text" name=ApellidoP" required placeholder="Escriba aqui su ApellidoP"/>
                 <label>Apellido Materno:</label>
@@ -159,15 +179,15 @@ form input{
                 <label>Celular:</label>
                 <input type="text" name="Celular" id="Celular" required onClick="validacion()" placeholder="Escriba aqui su Celular"/>
                 <label>Domicilio:</label>
-                <input type="text" name="Domicilio" onClick="validarNum()" required placeholder="Escriba aqui su Domicilio"/>
+                <input type="text" name="Domicilio" id="Domicilio" onClick="validarNum()" required placeholder="Escriba aqui su Domicilio"/>
                 
                 <label>Tipo de Usuario:</label>
-                <select name="TipoUser">
+                <select name="TipoUser" onClick="validarDom()">
                     <option value="Admin">Admin</option>
                     <option value="Normal">Normal</option>
                 </select>
 
-               <input type="Submit" name="Nuevo Angel"   /> 
+               <input type="Submit" name="Nuevo Angel" /> 
             </div> 
                 
         </form> 

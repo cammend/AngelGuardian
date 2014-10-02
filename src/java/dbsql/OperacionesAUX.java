@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class OperacionesAUX {
 
@@ -90,15 +91,7 @@ public class OperacionesAUX {
 
     }
 
-    public void TelUE(String CodigoUE, String Celular, String Domicilio) {
-        query = "Insert Into TelUE values ('" + CodigoUE + "','" + Celular + "','" + Domicilio + "')";
-        try {
-            consulta.executeUpdate(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+   
 
     public void UsuarioAng(int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero, int TipoUser) {
 
@@ -132,6 +125,48 @@ public class OperacionesAUX {
             consulta.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+
+
+    }
+    
+    
+
+    public void UsuarioEnt(int CodigoE, int DPI, String Nombre, String ApellidoP, String ApellidoM, String Genero, String Alias, String Password, int TipoUser) {
+        String query = "Insert Into UsuarioEnt(DPI, Nombre,ApellidoP, ApellidoM,Genero, Alias,  Password,CodigoE, TipoUser) values (" + DPI + ",'" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "','" + Genero + "','" + Alias + "','" + Password + "'," + CodigoE + "," + TipoUser + ")";
+
+        try {
+
+            consulta.executeUpdate(query);
+
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    
+    
+    public void TelUE(int DPI, int Celular, int Domicilio) {
+        String Cod = "Select CodigoUE from UsuarioEnt where DPI = " + DPI + " ";
+        int CodigoUE = 0;
+        try {
+            consulta = conex.createStatement();
+            rs = consulta.executeQuery(Cod);
+            while (rs.next()) {
+                CodigoUE = rs.getInt("CodigoUE");
+
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+
+
+        String query = "Insert Into TelUE (CodigoUE,Celular,Domicilio) values (" + CodigoUE + "," + Celular + "," + Domicilio + ")";
+        try {
+            consulta.executeUpdate(query);
+        } catch (Exception e) {
         }
 
     }

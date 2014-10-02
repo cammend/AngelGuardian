@@ -269,7 +269,7 @@ public class DBio {
         }
     }
 
-    //Estos son mis metodos y manda a llamar los otros metodos de la clase OperacionesAUX
+    
     //Estos son mis metodos y manda a llamar los otros metodos de la clase OperacionesAUX
     public void ingresarPiloto(int dpi, String Nombre, String ApellidoP, String ApellidoM, String Genero, int Celular, int Domicilio) {
         a.PilotoAngel(dpi, Nombre, ApellidoP, ApellidoM, Genero);
@@ -287,4 +287,19 @@ public class DBio {
         a.Entidad(Nombre);
         a.DireccionE(CodigoE, Departamento, Municipio, Colonia, Barrio, Cacerío);
     }
+    
+    
+    
+    
+    
+    // Estos son los metodos para usuario Entidad
+    
+    
+  
+    public void InsertarUE(int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, int CodigoE,String Genero, int Celular, int Domicilio, int TipoUser){
+          a.UsuarioEnt ( CodigoE,DPI, Nombre, ApellidoP, ApellidoM, Alias, Password, Genero, TipoUser);
+          a.TelUE(DPI,Celular, Domicilio);
+    }
+    
+    
 }

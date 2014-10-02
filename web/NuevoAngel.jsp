@@ -149,7 +149,7 @@
             //tu servlet que procesa la info. este mapeo se hace en el archivo web.xml o
             //directamente en el servlet. en este caso como lo tenes en tu servlet lo voy
             //a modificar ahi.
-        %>
+%>
         <h1><center>Nuevo Angel</center></h1>
 
 

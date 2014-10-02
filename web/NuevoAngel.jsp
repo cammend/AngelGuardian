@@ -183,8 +183,8 @@ form input{
                 
                 <label>Tipo de Usuario:</label>
                 <select name="TipoUser" onClick="validarDom()">
-                    <option value="Admin">Admin</option>
-                    <option value="Normal">Normal</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Normal</option>
                 </select>
 
                <input type="Submit" name="Nuevo Angel" /> 

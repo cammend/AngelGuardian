@@ -277,13 +277,11 @@ public class DBio {
                a.TelP( Celular, Domicilio);
                     }      
 
-     public void UsuarioAngel(int dpi, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero,int TipoUser,int Celular, int Domicilio){
-         
-        a.UsuarioAng(dpi, Nombre, ApellidoP, ApellidoM, Alias, Password,  Genero, TipoUser); 
-        
-        a.TelUA(Celular, Domicilio);
-         
-     }                      
+     public void UsuarioAngel (int DPI, String Nombre, String ApellidoP, String ApellidoM,String Genero, String Alias, String Password,int TipoUser, int Celular, int Domicilio){
+               a.UsuarioAng(DPI, Nombre, ApellidoP, ApellidoM, Genero,  Alias, Password, TipoUser);
+               a.TelUA(DPI, Celular, Domicilio);
+               
+                    }                        
        
        public void NuevaEntidad(String CodigoE, String Nombre,String Departamento,String Municipio,String Colonia,String Barrio,String Cacerío){
            

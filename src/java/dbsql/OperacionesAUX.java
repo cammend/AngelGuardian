@@ -14,6 +14,7 @@ public class OperacionesAUX {
     private ResultSet rs = null; 
     private String query = null;
     
+    
     //Conexion con = new Conexion();
     
     public OperacionesAUX(Connection con){
@@ -77,25 +78,7 @@ public class OperacionesAUX {
             }
         }   
     
-   public void UsuarioAng (int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero,int TipoUser){
-   String query = "Insert Into UsuarioAngel( DPI, Nombre, ApellidoP, ApellidoM, Alias, Password, Genero,TipoUser) values ("+DPI+",'"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+Alias+"','"+Password+"','"+Genero+"',"+TipoUser+")";
-            try{
-                consulta.executeUpdate(query);
-                
-            } catch(Exception e){
-                 e.printStackTrace();
-            }
-        }
-   
-    public void TelUA ( int Celular, int Domicilio){
-                query = "Insert Into TelUA values ("+Celular+","+Domicilio+")";
-               try{
-                  consulta.executeUpdate(query);
-                            } catch(Exception e){
-                            e.printStackTrace();
-                }
-
-} 
+  
     
      public void insertarEbrio(int CodigoEb, int DPI,String Nombre, String ApellidoP, String ApellidoM){
                 
@@ -121,4 +104,49 @@ public void TelUE (String CodigoUE, String Celular, String Domicilio){
 
 } 
     
+ 
+
+public void UsuarioAng (int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero,int TipoUser){
+           
+        String query = "Insert Into UsuarioAngel (DPI,Nombre,ApellidoP,ApellidoM,Alias,Password,Genero,TipoUser) values ("+DPI+",'"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+Alias+"','"+Password+"','"+Genero+"',"+TipoUser+")";
+       
+            try{
+                consulta.executeUpdate(query);
+                consulta.close();
+            } catch(Exception e){
+                 e.printStackTrace();
+            }
+        }
+   
+   
+   
+    public void TelUA (int DPI, int Celular, int Domicilio){
+                String Cod = "Select CodigoUA from UsuarioAngel where DPI = "+DPI+" "; 
+                int CodigoUA = 0;
+                 try{
+                    consulta = conex.createStatement();
+                     rs = consulta.executeQuery(Cod);
+                  while(rs.next()){
+                    CodigoUA = rs.getInt("CodigoUA");
+                    
+                    }          
+                } catch (Exception ex) { 
+           ex.printStackTrace();
+        } 
+                        
+                
+                query = "Insert Into TelUA values ("+CodigoUA+","+Celular+","+Domicilio+")";
+                     try{
+                            consulta.executeUpdate(query);
+                            } catch(Exception e){
+                            e.printStackTrace();
+                }
+
+} 
+    
+
+
+
+
+
 }

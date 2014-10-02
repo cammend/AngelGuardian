@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author user
@@ -38,49 +37,45 @@ public class NuevoAngel extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
-         try{  
-       
-             DBio regis = new DBio();
-             String DPI = request.getParameter("DPI");
-             String Nombre = request.getParameter("Nombre");
-             String ApellidoP = request.getParameter("ApellidoP");
-             String ApellidoM = request.getParameter("ApellidoM");
-             String Genero = request.getParameter("Genero");
-             String Alias = request.getParameter("Alias");
-             String Password = request.getParameter("Password");
-             String TipoUser = request.getParameter("TipoUser");
-             String Celular = request.getParameter("Celular");
-             String Domicilio = request.getParameter("Domicilio");
-           
-             
-            regis.UsuarioAngel((Integer.parseInt(DPI)), Nombre, ApellidoP, ApellidoM, Alias, Password, Genero,(Integer.parseInt(TipoUser)) , (Integer.parseInt(Celular)),(Integer.parseInt(Domicilio)));
-            
-              try{
-                  
-                  
-                 out.println("<html>");
-                 out.println("<head>");
-                 out.println("<title>Servlet ProcesaSesion</title>");
-                 out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/org\">");
-                 out.println("</head>");
-                 out.println("<body>");
-                 out.println("<h1>Servlet ProcesaSesion at " + request.getContextPath() + "</h1>");
-                 out.println("</body>");
-                 out.println("</html>");
-            }catch(Exception ex){
-               
-                JOptionPane.showMessageDialog(null, ex);
-           
+
+        try {
+
+            DBio regis = new DBio();
+            String DPI = request.getParameter("DPI");
+            String Nombre = request.getParameter("Nombre");
+            String ApellidoP = request.getParameter("ApellidoP");
+            String ApellidoM = request.getParameter("ApellidoM");
+            String Genero = request.getParameter("Genero");
+            String Alias = request.getParameter("Alias");
+            String Password = request.getParameter("Password");
+            String TipoUser = request.getParameter("TipoUser");
+            String Celular = request.getParameter("Celular");
+            String Domicilio = request.getParameter("Domicilio");
+
+
+            regis.UsuarioAngel((Integer.parseInt(DPI)), Nombre, ApellidoP, ApellidoM, Alias, Password, Genero, (Integer.parseInt(TipoUser)), (Integer.parseInt(Celular)), (Integer.parseInt(Domicilio)));
+
+            try {
+
+
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet ProcesaSesion</title>");
+                out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/org\">");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet ProcesaSesion at " + request.getContextPath() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            } catch (Exception ex) {
             }
-           
-           
-               
-            } finally {            
+
+
+
+        } finally {
             out.close();
         }
     }
-   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -108,7 +108,7 @@ public void TelUE (String CodigoUE, String Celular, String Domicilio){
 
 public void UsuarioAng (int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero,int TipoUser){
            
-        String query = "Insert Into UsuarioAngel (DPI,Nombre,ApellidoP,ApellidoM,Alias,Password,Genero,TipoUser) values ("+DPI+",'"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+Alias+"','"+Password+"','"+Genero+"',"+TipoUser+")";
+        String query = "Insert Into UsuarioAngel (DPI,Nombre, ApellidoP, ApellidoM,Alias,Password,Genero,TipoUser) values ("+DPI+",'"+Nombre+"','"+ApellidoP+"','"+ApellidoM+"','"+Alias+"','"+Password+"','"+Genero+"',"+TipoUser+")";
        
             try{
                 consulta.executeUpdate(query);

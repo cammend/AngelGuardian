@@ -165,7 +165,7 @@ form input{
                 <label>Nombre:</label>
                 <input type="text" name="Nombre" required onClick="validarDpi()"  placeholder="Escriba aqui su Nombre"/>
                 <label>Apellido Paterno:</label>
-                <input type="text" name=ApellidoP" required placeholder="Escriba aqui su ApellidoP"/>
+                <input type="text" name="ApellidoP" required placeholder="Escriba aqui su ApellidoP"/>
                 <label>Apellido Materno:</label>
                 <input type="text" name="ApellidoM" required placeholder="Escriba aqui su ApellidoM"/>
                 <label>Genero:</label>

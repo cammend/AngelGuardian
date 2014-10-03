@@ -126,7 +126,7 @@
                 </form> 
 
                 <footer >
-                    <br><br><br><br><br><br>
+                    <br><br><br>
                     Desarrollado por Brandon!<br>
                     Sitio Web desarrollado en Java.
                 </footer>

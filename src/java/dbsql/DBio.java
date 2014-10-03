@@ -223,8 +223,8 @@ public class DBio {
 
         return true;
     }
-    
-    public ArrayList getSolicitudesEnProceso(){
+
+    public ArrayList getSolicitudesEnProceso() {
         ArrayList<SolicitudProceso> SolicitudP = new ArrayList();
         String codigoSolicitud;
         Date Fecha;
@@ -238,12 +238,12 @@ public class DBio {
         String codPiloto;
         Statement declaracion2;
         ResultSet resultado2;
-        try{
+        try {
             declaracion2 = conexion.createStatement();
             resultado = declaracion.executeQuery("select a.CodigoS, a.Fecha, b.Nombre, b.ApellidoP, c.Nombre, c.Apellido, c.Telefono, a.CodigoP from Solicitud a JOIN (Ebrio b JOIN EncargadoEbrio c ON b.CodigoEb = c.CODIGOEb) ON b.CodigoEb = a.CodigoEb where a.Estado = 'Proceso'");
             //JOptionPane.showMessageDialog(null, "se hizo la consulta");
-            while( resultado.next() ){
-                codigoSolicitud = String.valueOf( resultado.getObject(1) );
+            while (resultado.next()) {
+                codigoSolicitud = String.valueOf(resultado.getObject(1));
                 Fecha = resultado.getDate(2);
                 nombreEbrio = resultado.getString(3);
                 apellidoEbrio = resultado.getString(4);
@@ -251,37 +251,37 @@ public class DBio {
                 apellidoEncargado = resultado.getString(6);
                 telEncargado = resultado.getString(7);
                 codPiloto = String.valueOf(resultado.getObject(8));
-                resultado2 = declaracion2.executeQuery("select Nombre, ApellidoP from PilotoAngel where CodigoP = "+codPiloto);
+                resultado2 = declaracion2.executeQuery("select Nombre, ApellidoP from PilotoAngel where CodigoP = " + codPiloto);
                 resultado2.next();
                 nombrePiloto = resultado2.getString(1);
                 apellidoPiloto = resultado2.getString(2);
                 //JOptionPane.showMessageDialog(null, "se entró al while");
-                SolicitudP.add(new SolicitudProceso(codigoSolicitud,Fecha,nombreEbrio,apellidoEbrio,nombreEncargado,apellidoEncargado,telEncargado,nombrePiloto,apellidoPiloto));
+                SolicitudP.add(new SolicitudProceso(codigoSolicitud, Fecha, nombreEbrio, apellidoEbrio, nombreEncargado, apellidoEncargado, telEncargado, nombrePiloto, apellidoPiloto));
                 //JOptionPane.showMessageDialog(null, "se hizo un nuevo add");
             }
             //this.cerrar();
             return SolicitudP;
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "error en solicitudes "+ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error en solicitudes " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
     }
-    
-    public boolean atenderSolicitudesEnProceso(String codigoS, String codigoUA){
-        try{
+
+    public boolean atenderSolicitudesEnProceso(String codigoS, String codigoUA) {
+        try {
             //actualizamos la tabla solicitud pasando la solicitud a 'Atendida'
-            declaracion.executeQuery("update Solicitud set Estado = 'Atendida' where CodigoS = "+codigoS);
+            declaracion.executeQuery("update Solicitud set Estado = 'Atendida' where CodigoS = " + codigoS);
             //se registra el cambio de estado en la solicitud estado
-            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Proceso',"+codigoS+","+codigoUA+",sysdate)");
-        }catch(Exception ex){
+            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Proceso'," + codigoS + "," + codigoUA + ",sysdate)");
+        } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
         return true;
     }
-    
-    public ArrayList getSolicitudesResgistradas(){
+
+    public ArrayList getSolicitudesResgistradas() {
         ArrayList<SolicitudRegistrada> SolicitudR = new ArrayList();
         String codigoSolicitud;
         Date Fecha;
@@ -290,11 +290,11 @@ public class DBio {
         String nombreEncargado;
         String apellidoEncargado;
         String telEncargado;
-        try{
+        try {
             resultado = declaracion.executeQuery("select a.CodigoS, a.Fecha, b.Nombre, b.ApellidoP, c.Nombre, c.Apellido, c.Telefono from Solicitud a JOIN (Ebrio b JOIN EncargadoEbrio c ON b.CodigoEb = c.CODIGOEb) ON b.CodigoEb = a.CodigoEb where a.Estado = 'Registrada'");
             //JOptionPane.showMessageDialog(null, "se hizo la consulta");
-            while( resultado.next() ){
-                codigoSolicitud = String.valueOf( resultado.getObject(1) );
+            while (resultado.next()) {
+                codigoSolicitud = String.valueOf(resultado.getObject(1));
                 Fecha = resultado.getDate(2);
                 nombreEbrio = resultado.getString(3);
                 apellidoEbrio = resultado.getString(4);
@@ -302,61 +302,61 @@ public class DBio {
                 apellidoEncargado = resultado.getString(6);
                 telEncargado = resultado.getString(7);
                 //JOptionPane.showMessageDialog(null, "se entró al while");
-                SolicitudR.add(new SolicitudRegistrada(codigoSolicitud,Fecha,nombreEbrio,apellidoEbrio,nombreEncargado,apellidoEncargado,telEncargado));
+                SolicitudR.add(new SolicitudRegistrada(codigoSolicitud, Fecha, nombreEbrio, apellidoEbrio, nombreEncargado, apellidoEncargado, telEncargado));
                 //JOptionPane.showMessageDialog(null, "se hizo un nuevo add");
             }
             //this.cerrar();
             return SolicitudR;
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "error en solicitudes "+ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error en solicitudes " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
     }
-    
-    public ArrayList getPilotosDisponibles(){
+
+    public ArrayList getPilotosDisponibles() {
         ArrayList<Piloto> piloto = new ArrayList();
-        try{
+        try {
             resultado = declaracion.executeQuery("select CodigoP, Nombre, ApellidoP from PilotoAngel where Disponible = 'Si'");
             String codigo;
             String nombre;
             String apellido;
-            while( resultado.next() ){
-                codigo = String.valueOf( resultado.getObject(1) );
+            while (resultado.next()) {
+                codigo = String.valueOf(resultado.getObject(1));
                 nombre = resultado.getString(2);
                 apellido = resultado.getString(3);
-                piloto.add(new Piloto(codigo,nombre,apellido));
+                piloto.add(new Piloto(codigo, nombre, apellido));
             }
             this.cerrar();
             return piloto;
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "error en pilotos " +ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error en pilotos " + ex.getMessage());
             ex.printStackTrace();
         }
         return null;
     }
-    
-    public boolean atenderSolicitud(String codigoS, String codigoP, String codigoUA){
-        if( codigoUA == null ) {
+
+    public boolean atenderSolicitud(String codigoS, String codigoP, String codigoUA) {
+        if (codigoUA == null) {
             return false;
         }
-        try{
+        try {
             //primero acutalizamos la tabla de pilotoAngel y ponemos Disponible = No
-            declaracion.executeUpdate("update PilotoAngel set Disponible = 'No' where CodigoP = "+codigoP);
+            declaracion.executeUpdate("update PilotoAngel set Disponible = 'No' where CodigoP = " + codigoP);
             //asignamos el codigo del piloto a la tabla Solicitud
-            declaracion.executeUpdate("update Solicitud set codigoP = "+codigoP+", Estado = 'Proceso' where CodigoS = "+codigoS);
+            declaracion.executeUpdate("update Solicitud set codigoP = " + codigoP + ", Estado = 'Proceso' where CodigoS = " + codigoS);
             //agregamos una fila a la tabla solicitud estado
-            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Proceso',"+codigoS+","+codigoUA+",sysdate)");
+            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Proceso'," + codigoS + "," + codigoUA + ",sysdate)");
             //retornamos verdadero si no hubo error
             return true;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             ex.printStackTrace();
         }
         return false;
     }
-    
-    public ArrayList<Solicitud> getSolicitudesPendientes(){
+
+    public ArrayList<Solicitud> getSolicitudesPendientes() {
         procesarSolicitudesPendientes();
         return solicitudes;
     }
@@ -399,7 +399,6 @@ public class DBio {
         }
     }
 
-    
     //Estos son mis metodos y manda a llamar los otros metodos de la clase OperacionesAUX
     public void ingresarPiloto(int dpi, String Nombre, String ApellidoP, String ApellidoM, String Genero, int Celular, int Domicilio) {
         a.PilotoAngel(dpi, Nombre, ApellidoP, ApellidoM, Genero);
@@ -412,24 +411,14 @@ public class DBio {
 
     }
 
-    public void NuevaEntidad(String CodigoE, String Nombre, String Departamento, String Municipio, String Colonia, String Barrio, String Cacerío) {
-
+    public void InsertarEntidad(String Nombre, String Departamento, String Municipio, String Colonia, String Barrio, String Cacerio, int Zona) {
         a.Entidad(Nombre);
-        a.DireccionE(CodigoE, Departamento, Municipio, Colonia, Barrio, Cacerío);
+        a.DireccionE(Nombre, Departamento, Municipio, Colonia, Barrio, Cacerio, Zona);
     }
-    
-    
-    
-    
-    
+
     // Estos son los metodos para usuario Entidad
-    
-    
-  
-    public void InsertarUE(int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, int CodigoE,String Genero, int Celular, int Domicilio, int TipoUser){
-          a.UsuarioEnt ( CodigoE,DPI, Nombre, ApellidoP, ApellidoM, Alias, Password, Genero, TipoUser);
-          a.TelUE(DPI,Celular, Domicilio);
+    public void InsertarUE(int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, int CodigoE, String Genero, int Celular, int Domicilio, int TipoUser) {
+        a.UsuarioEnt(CodigoE, DPI, Nombre, ApellidoP, ApellidoM, Alias, Password, Genero, TipoUser);
+        a.TelUE(DPI, Celular, Domicilio);
     }
-    
-    
 }

@@ -43,12 +43,12 @@ public class NuevaEntidad extends HttpServlet {
        String Municipio = request.getParameter("Municipio");
        String Colonia = request.getParameter("Colonia");
        String Barrio = request.getParameter("Barrio");
-       String Cacerío = request.getParameter("Cacerío");
-       String CodigoE = "3";
+       String Cacerio = request.getParameter("Cacerio");
+       String Zona = request.getParameter("Zona");
             
-        regis.NuevaEntidad(CodigoE, Nombre, Departamento, Municipio, Colonia, Barrio, Cacerío);    
+        regis.InsertarEntidad(Nombre, Departamento, Municipio, Colonia, Barrio, Cacerio,Integer.parseInt(Zona));    
             
-             response.sendRedirect("index.jsp");
+             
             
             
            

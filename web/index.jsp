@@ -18,6 +18,7 @@
             <nav>
                 <ul>
                     <li><a href="index.jsp">Inicio</a></li>
+                    <li><a href="NuevaEntidad.jsp">Nueva Entidad</a></li>
                     <%
                     if( request.getSession().getAttribute("TipoSesion") != null ){
                         if ( request.getSession().getAttribute("NombreEntidad") != null ){

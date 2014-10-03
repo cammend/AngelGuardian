@@ -84,6 +84,14 @@
         <servlet-name>SolicitudesProceso</servlet-name>
         <url-pattern>/org/solicitudes/enproceso/procesando</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Core</servlet-name>
+        <url-pattern>/entidad/usuario/nuevo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Core</servlet-name>
+        <url-pattern>/org/entidades/mapa</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

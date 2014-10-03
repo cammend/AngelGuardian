@@ -13,7 +13,7 @@
 
     </head>
     <body>
-        <form action = "NuevaEntidad" method="post">  
+        <form action = "NuevaEntidad/procesando" method="post">  
             <table >
                 <tr >
                      <h1>Bienvenido! Ingrese entidad </h1>   </td> 

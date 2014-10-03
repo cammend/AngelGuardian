@@ -50,7 +50,7 @@ if( sesion.getAttribute("TipoSesion") != null ){
         <%
         DBio dbio = new DBio();
         ArrayList<SolicitudProceso> es = dbio.getSolicitudesEnProceso();
-        if( es != null ){
+        if( es != null && es.size() != 0 ){
             out.println("<table >");
             out.println("<tr>");
             out.println("<td>Codigo Solicitud</td>");
@@ -88,7 +88,7 @@ if( sesion.getAttribute("TipoSesion") != null ){
             }
             out.println("</table>");
         }else{
-            out.println("<h2>No se encontraron solicitudes Registradas o no hay Pilotos Disponibles</h2>");
+            out.println("<h2>No se encontraron solicitudes en Proceso</h2>");
         }
         %>
     </body>

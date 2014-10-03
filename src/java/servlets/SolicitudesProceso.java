@@ -49,7 +49,7 @@ public class SolicitudesProceso extends HttpServlet {
             }else{
                 out.println("<html>");
                 out.println("<head>");
-                out.println("<title>Éxito!</title>");
+                out.println("<title>Error!</title>");
                 out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"5;/Angel2/org\">");
                 out.println("</head>");
                 out.println("<body>");

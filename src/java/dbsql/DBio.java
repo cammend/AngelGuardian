@@ -273,7 +273,7 @@ public class DBio {
             //actualizamos la tabla solicitud pasando la solicitud a 'Atendida'
             declaracion.executeQuery("update Solicitud set Estado = 'Atendida' where CodigoS = "+codigoS);
             //se registra el cambio de estado en la solicitud estado
-            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Proceso',"+codigoS+","+codigoUA+",sysdate)");
+            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Atendida',"+codigoS+","+codigoUA+",sysdate)");
         }catch(Exception ex){
             ex.printStackTrace();
             return false;

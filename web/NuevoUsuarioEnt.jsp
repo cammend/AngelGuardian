@@ -148,7 +148,7 @@
         <div id="formulario">
             <div id="f">
 
-                <form action = "UsuarioEnt" method="post"  >  
+                <form action = "nuevo/procesando" method="post"  >  
                     <div name="DatosEntidad" class="div-form">
                         <h3>Ingresar Datos del Usuario:</h3>
 

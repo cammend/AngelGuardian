@@ -53,8 +53,9 @@ if( sesion.getAttribute("TipoSesion") != null ){
         <div id="navegacion">
             <h3>Navegación</h3>
             <h4>
-                <a href="entidad/solicitud/nueva">Nueva Entidad</a>
+                <a href="entidad/solicitud/nueva">Nueva Solicitud</a>
                 <a href="entidad/usuarios">Ver usuarios</a>
+                <a href="entidad/usuario/nuevo">Nuevo Usuario</a>
             </h4>
         </div>
         

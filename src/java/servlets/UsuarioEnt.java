@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Gerson pineda
  */ 
-@WebServlet(name = "UsuarioEnt", urlPatterns = {"/UsuarioEnt"})
+@WebServlet(name = "UsuarioEnt", urlPatterns = {"/entidad/usuario/nuevo/procesando"})
 public class UsuarioEnt extends HttpServlet {
 
     /**
@@ -59,7 +59,7 @@ public class UsuarioEnt extends HttpServlet {
                  out.println("<html>");
                  out.println("<head>");
                  out.println("<title>Servlet ProcesaSesion</title>");
-                 out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/index.jsp\">");
+                 out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/entidad\">");
                  out.println("</head>");
                  out.println("<body>");
                  out.println("<h1>Servlet ProcesaSesion at " + request.getContextPath() + "</h1>");

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author user
  */
-@WebServlet(name = "NuevaEntidad", urlPatterns = {"/NuevaEntidad"})
+@WebServlet(name = "NuevaEntidad", urlPatterns = {"/NuevaEntidad/procesando"})
 public class NuevaEntidad extends HttpServlet {
 
     /**
@@ -48,7 +48,7 @@ public class NuevaEntidad extends HttpServlet {
             
         regis.NuevaEntidad(CodigoE, Nombre, Departamento, Municipio, Colonia, Barrio, Cacerío);    
             
-             response.sendRedirect("index.jsp");
+       out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/\">");
             
             
            

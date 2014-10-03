@@ -16,6 +16,14 @@
         <servlet-name>top5</servlet-name>
         <servlet-class>servlets.top5</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcesarSolicitudRegistrada</servlet-name>
+        <servlet-class>servlets.ProcesarSolicitudRegistrada</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudesProceso</servlet-name>
+        <servlet-class>servlets.SolicitudesProceso</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProcesaSesion</servlet-name>
         <url-pattern>/comprobando/login</url-pattern>
@@ -45,12 +53,16 @@
         <url-pattern>/org/entidades/top5</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>top5</servlet-name>
-        <url-pattern>/reportes/top5</url-pattern>
+        <servlet-name>Core</servlet-name>
+        <url-pattern>/org/solicitudes/pendientes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Core</servlet-name>
-        <url-pattern>/org/solicitudes/pendientes</url-pattern>
+        <url-pattern>/org/solicitudes/enproceso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>top5</servlet-name>
+        <url-pattern>/reportes/top5</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Core</servlet-name>
@@ -63,6 +75,14 @@
     <servlet-mapping>
         <servlet-name>Core</servlet-name>
         <url-pattern>/entidad/solicitud/nueva/procesando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcesarSolicitudRegistrada</servlet-name>
+        <url-pattern>/org/solicitudes/pendientes/procesando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudesProceso</servlet-name>
+        <url-pattern>/org/solicitudes/enproceso/procesando</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

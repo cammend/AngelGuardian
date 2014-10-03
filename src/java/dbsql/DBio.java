@@ -1,8 +1,6 @@
 package dbsql;
 
-import clases.EntidadSolicitud;
-import clases.Solicitud;
-import clases.TipoUsuario;
+import clases.*;
 import driver.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
@@ -223,6 +221,138 @@ public class DBio {
         }
         
         return true;
+    }
+    
+    public ArrayList getSolicitudesEnProceso(){
+        ArrayList<SolicitudProceso> SolicitudP = new ArrayList();
+        String codigoSolicitud;
+        Date Fecha;
+        String nombreEbrio;
+        String apellidoEbrio;
+        String nombreEncargado;
+        String apellidoEncargado;
+        String telEncargado;
+        String nombrePiloto;
+        String apellidoPiloto;
+        String codPiloto;
+        Statement declaracion2;
+        ResultSet resultado2;
+        try{
+            declaracion2 = conexion.createStatement();
+            resultado = declaracion.executeQuery("select a.CodigoS, a.Fecha, b.Nombre, b.ApellidoP, c.Nombre, c.Apellido, c.Telefono, a.CodigoP from Solicitud a JOIN (Ebrio b JOIN EncargadoEbrio c ON b.CodigoEb = c.CODIGOEb) ON b.CodigoEb = a.CodigoEb where a.Estado = 'Proceso'");
+            //JOptionPane.showMessageDialog(null, "se hizo la consulta");
+            while( resultado.next() ){
+                codigoSolicitud = String.valueOf( resultado.getObject(1) );
+                Fecha = resultado.getDate(2);
+                nombreEbrio = resultado.getString(3);
+                apellidoEbrio = resultado.getString(4);
+                nombreEncargado = resultado.getString(5);
+                apellidoEncargado = resultado.getString(6);
+                telEncargado = resultado.getString(7);
+                codPiloto = String.valueOf(resultado.getObject(8));
+                resultado2 = declaracion2.executeQuery("select Nombre, ApellidoP from PilotoAngel where CodigoP = "+codPiloto);
+                resultado2.next();
+                nombrePiloto = resultado2.getString(1);
+                apellidoPiloto = resultado2.getString(2);
+                //JOptionPane.showMessageDialog(null, "se entró al while");
+                SolicitudP.add(new SolicitudProceso(codigoSolicitud,Fecha,nombreEbrio,apellidoEbrio,nombreEncargado,apellidoEncargado,telEncargado,nombrePiloto,apellidoPiloto));
+                //JOptionPane.showMessageDialog(null, "se hizo un nuevo add");
+            }
+            //this.cerrar();
+            return SolicitudP;
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "error en solicitudes "+ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public boolean atenderSolicitudesEnProceso(String codigoS, String codigoUA){
+        try{
+            //actualizamos la tabla solicitud pasando la solicitud a 'Atendida'
+            declaracion.executeQuery("update Solicitud set Estado = 'Atendida' where CodigoS = "+codigoS);
+            //se registra el cambio de estado en la solicitud estado
+            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Proceso',"+codigoS+","+codigoUA+",sysdate)");
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    public ArrayList getSolicitudesResgistradas(){
+        ArrayList<SolicitudRegistrada> SolicitudR = new ArrayList();
+        String codigoSolicitud;
+        Date Fecha;
+        String nombreEbrio;
+        String apellidoEbrio;
+        String nombreEncargado;
+        String apellidoEncargado;
+        String telEncargado;
+        try{
+            resultado = declaracion.executeQuery("select a.CodigoS, a.Fecha, b.Nombre, b.ApellidoP, c.Nombre, c.Apellido, c.Telefono from Solicitud a JOIN (Ebrio b JOIN EncargadoEbrio c ON b.CodigoEb = c.CODIGOEb) ON b.CodigoEb = a.CodigoEb where a.Estado = 'Registrada'");
+            //JOptionPane.showMessageDialog(null, "se hizo la consulta");
+            while( resultado.next() ){
+                codigoSolicitud = String.valueOf( resultado.getObject(1) );
+                Fecha = resultado.getDate(2);
+                nombreEbrio = resultado.getString(3);
+                apellidoEbrio = resultado.getString(4);
+                nombreEncargado = resultado.getString(5);
+                apellidoEncargado = resultado.getString(6);
+                telEncargado = resultado.getString(7);
+                //JOptionPane.showMessageDialog(null, "se entró al while");
+                SolicitudR.add(new SolicitudRegistrada(codigoSolicitud,Fecha,nombreEbrio,apellidoEbrio,nombreEncargado,apellidoEncargado,telEncargado));
+                //JOptionPane.showMessageDialog(null, "se hizo un nuevo add");
+            }
+            //this.cerrar();
+            return SolicitudR;
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "error en solicitudes "+ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public ArrayList getPilotosDisponibles(){
+        ArrayList<Piloto> piloto = new ArrayList();
+        try{
+            resultado = declaracion.executeQuery("select CodigoP, Nombre, ApellidoP from PilotoAngel where Disponible = 'Si'");
+            String codigo;
+            String nombre;
+            String apellido;
+            while( resultado.next() ){
+                codigo = String.valueOf( resultado.getObject(1) );
+                nombre = resultado.getString(2);
+                apellido = resultado.getString(3);
+                piloto.add(new Piloto(codigo,nombre,apellido));
+            }
+            this.cerrar();
+            return piloto;
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "error en pilotos " +ex.getMessage());
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public boolean atenderSolicitud(String codigoS, String codigoP, String codigoUA){
+        if( codigoUA == null ) {
+            return false;
+        }
+        try{
+            //primero acutalizamos la tabla de pilotoAngel y ponemos Disponible = No
+            declaracion.executeUpdate("update PilotoAngel set Disponible = 'No' where CodigoP = "+codigoP);
+            //asignamos el codigo del piloto a la tabla Solicitud
+            declaracion.executeUpdate("update Solicitud set codigoP = "+codigoP+", Estado = 'Proceso' where CodigoS = "+codigoS);
+            //agregamos una fila a la tabla solicitud estado
+            declaracion.executeUpdate("insert into SolicitudEstado (Estado, CodigoS, CodigoUA, FechaCambio) values ('Proceso',"+codigoS+","+codigoUA+",sysdate)");
+            //retornamos verdadero si no hubo error
+            return true;
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
     }
     
     public ArrayList<Solicitud> getSolicitudesPendientes(){

@@ -50,12 +50,19 @@ if( sesion.getAttribute("TipoSesion") != null ){
         <div id="navegacion">
             <h3>Navegación</h3>
             <h4>
-                <a href="org/entidades/top5">Entidades más activas</a>
-                <a href="org/entidades/mapa">Ver mapa de Entidades</a>
                 <a href="org/entidades">Ver todas las Entidades</a>
                 <a href="org/solicitudes/pendientes">Ver solicitudes pendientes</a>
+                <a href="org/solicitudes/enproceso">Ver solicitudes en Proceso</a>
                 <a href="org/solicitudes/eliminadas">Ver solicitudes eleminadas</a>
                 <a href="org/user/nuevo">Nuevo Usuario</a>
+            </h4>
+        </div>
+        <br>
+        <div id="navegacion">
+            <h3>Reportes</h3>
+            <h4>
+                <a href="org/entidades/top5">Entidades más activas</a>
+                <a href="org/entidades/mapa">Ver mapa de Entidades</a>
             </h4>
         </div>
         

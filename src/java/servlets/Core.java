@@ -46,8 +46,6 @@ public class Core extends HttpServlet {
             out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/\">");
         }else if( userPath.equals("/entidad") ){
             url = "paginaPrincipalEntidad.jsp";
-        }else if( userPath.equals("/org/solicitudes/pendientes") ){
-            url = "/SolicitudesPendientesJsp.jsp";
         }else if( userPath.equals("/org/entidades/top5")){
             url = "/top5.jsp";
         }else if( userPath.equals("/org/user/nuevo")){
@@ -57,6 +55,10 @@ public class Core extends HttpServlet {
         }else if( userPath.equals("/entidad/solicitud/nueva/procesando")){
             ingresarNuevaSolicitud(request,out);
             return;
+        }else if( userPath.equals("/org/solicitudes/pendientes")){
+            url = "/SolicitudesRegistradas.jsp";
+        }else if( userPath.equals("/org/solicitudes/enproceso")){
+            url = "/SolicitudesProceso.jsp";
         }
         
         if( url != null ){

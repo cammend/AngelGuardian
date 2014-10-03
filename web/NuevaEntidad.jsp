@@ -10,6 +10,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP</title>
+        
+        <script>
+            
+            function validarZona() {
+                var valor = document.getElementById("Zona").value;
+                if (isNaN(valor)) {
+                    alert("ingrese Numeros")
+                    document.getElementById("Zona").focus();
+                    return false;
+                }
+                return true;
+            }
+            
+            
+            
+            
+        </script>
         <style>
             body{
                 background: rgb(233,233,233);
@@ -112,7 +129,7 @@
                         <label>Municipio:</label>
                         <input type="text" name="Municipio" required placeholder="Escriba aqui su Municipio"/>
                         <label>Zona:</label>
-                        <input type="text" name="Zona" required placeholder="Escriba aqui su Zona"/>
+                        <input type="text" name="Zona" id="Zona" onblur="validarZona()" required placeholder="Escriba aqui su Zona"/>
                         <label>Colonia:</label>
                         <input type="text" name="Colonia" required placeholder="Escriba aqui su Colonia"/>
                         <label>Barrio:</label>

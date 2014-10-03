@@ -50,32 +50,6 @@ public class OperacionesAUX {
         }
     }
 
-    public void Entidad(String Nombre) {
-
-        query = "Insert Into Entidad values ('" + Nombre + "')";
-
-        try {
-            consulta.executeUpdate(query);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void DireccionE(String CodigoE, String Departamento, String Municipio, String Colonia, String Barrio, String Cacerío) {
-
-
-
-        query = "Insert Into DireccionE values ('" + CodigoE + "','" + Departamento + "','" + Municipio + "','" + Colonia + "','" + Barrio + "','" + Cacerío + "')";
-
-        try {
-            consulta.executeUpdate(query);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void insertarEbrio(int CodigoEb, int DPI, String Nombre, String ApellidoP, String ApellidoM) {
 
         query = "insert into Ebrio (CodigoEb,DPI,Nombre,ApellidoP,ApellidoM) values (" + CodigoEb + "," + DPI + ",'" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "')";
@@ -90,8 +64,6 @@ public class OperacionesAUX {
         }
 
     }
-
-   
 
     public void UsuarioAng(int DPI, String Nombre, String ApellidoP, String ApellidoM, String Alias, String Password, String Genero, int TipoUser) {
 
@@ -130,8 +102,6 @@ public class OperacionesAUX {
 
 
     }
-    
-    
 
     public void UsuarioEnt(int CodigoE, int DPI, String Nombre, String ApellidoP, String ApellidoM, String Password, String Alias, String Genero, int TipoUser) {
         String query = "Insert Into UsuarioEnt(DPI, Nombre,ApellidoP, ApellidoM,Genero, Alias,  Password,CodigoE, TipoUser) values (" + DPI + ",'" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "','" + Genero + "','" + Alias + "','" + Password + "'," + CodigoE + "," + TipoUser + ")";
@@ -146,8 +116,6 @@ public class OperacionesAUX {
         }
     }
 
-    
-    
     public void TelUE(int DPI, int Celular, int Domicilio) {
         String Cod = "Select CodigoUE from UsuarioEnt where DPI = " + DPI + " ";
         int CodigoUE = 0;
@@ -163,11 +131,50 @@ public class OperacionesAUX {
         }
 
 
-        String query = "Insert Into TelUE (CodigoUE,Celular,Domicilio) values (" + CodigoUE + "," + Celular + "," + Domicilio + ")";
+         query = "Insert Into TelUE (CodigoUE,Celular,Domicilio) values (" + CodigoUE + "," + Celular + "," + Domicilio + ")";
         try {
             consulta.executeUpdate(query);
         } catch (Exception e) {
         }
 
     }
+
+   public void Entidad(String Nombre) {
+
+        query = "Insert Into Entidad (Nombre) values ('" + Nombre + "')";
+
+        try {
+            consulta.executeUpdate(query);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void DireccionE(String Nombre, String Departamento, String Municipio, String Colonia, String Barrio, String Cacerio, int Zona) {
+        String Cod = "Select CodigoE from Entidad where Nombre = '" + Nombre + "' ";
+        int CodigoE = 0;
+        try {
+            consulta = conex.createStatement();
+            rs = consulta.executeQuery(Cod);
+            while (rs.next()) {
+                CodigoE = rs.getInt("CodigoE");
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+        query = "Insert Into DireccionE (CodigoE,Departamento,Municipio,Colonia,Barrio,Cacerío,Zona) values (" + CodigoE + ",'" + Departamento + "','" + Municipio + "','" + Colonia + "','" + Barrio + "','" + Cacerio + "'," + Zona + ")";
+
+        try {
+            consulta.executeUpdate(query);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+   
 }

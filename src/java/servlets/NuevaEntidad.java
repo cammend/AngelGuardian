@@ -43,13 +43,28 @@ public class NuevaEntidad extends HttpServlet {
        String Municipio = request.getParameter("Municipio");
        String Colonia = request.getParameter("Colonia");
        String Barrio = request.getParameter("Barrio");
-       String Cacerío = request.getParameter("Cacerío");
-       String CodigoE = "3";
+       String Cacerio = request.getParameter("Cacerio");
+       String Zona = request.getParameter("Zona");
             
-        regis.NuevaEntidad(CodigoE, Nombre, Departamento, Municipio, Colonia, Barrio, Cacerío);    
+        regis.InsertarEntidad(Nombre, Departamento, Municipio, Colonia, Barrio, Cacerio,Integer.parseInt(Zona));    
             
+
        out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/\">");
-            
+
+           try {
+
+
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet ProcesaSesion</title>");
+                out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/entidad\">");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet ProcesaSesion at " + request.getContextPath() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
+            } catch (Exception ex) {
+            }               
             
            
         } finally {            

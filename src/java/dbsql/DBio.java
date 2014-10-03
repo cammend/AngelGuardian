@@ -415,10 +415,13 @@ public class DBio {
     public void NuevaEntidad(String CodigoE, String Nombre, String Departamento, String Municipio, String Colonia, String Barrio, String Cacerío) {
 
         a.Entidad(Nombre);
-        a.DireccionE(CodigoE, Departamento, Municipio, Colonia, Barrio, Cacerío);
+        a.DireccionE(CodigoE, Departamento, Municipio, Colonia, Barrio, Cacerío,1);
     }
     
-    
+    public void InsertarEntidad(String Nombre, String Departamento, String Municipio, String Colonia, String Barrio, String Cacerio, int Zona) {
+        a.Entidad(Nombre);
+        a.DireccionE(Nombre, Departamento, Municipio, Colonia, Barrio, Cacerio, Zona);
+    }
     
     
     

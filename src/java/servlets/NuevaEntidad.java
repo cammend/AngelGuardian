@@ -57,7 +57,7 @@ public class NuevaEntidad extends HttpServlet {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>Servlet ProcesaSesion</title>");
-                out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/entidad\">");
+                out.println("<META HTTP-EQUIV=\"REFRESH\" CONTENT=\"0;/Angel2/\">");
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Servlet ProcesaSesion at " + request.getContextPath() + "</h1>");

@@ -133,7 +133,7 @@ public class OperacionesAUX {
     
     
 
-    public void UsuarioEnt(int CodigoE, int DPI, String Nombre, String ApellidoP, String ApellidoM, String Genero, String Alias, String Password, int TipoUser) {
+    public void UsuarioEnt(int CodigoE, int DPI, String Nombre, String ApellidoP, String ApellidoM, String Password, String Alias, String Genero, int TipoUser) {
         String query = "Insert Into UsuarioEnt(DPI, Nombre,ApellidoP, ApellidoM,Genero, Alias,  Password,CodigoE, TipoUser) values (" + DPI + ",'" + Nombre + "','" + ApellidoP + "','" + ApellidoM + "','" + Genero + "','" + Alias + "','" + Password + "'," + CodigoE + "," + TipoUser + ")";
 
         try {

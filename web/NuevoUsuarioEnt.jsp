@@ -1,22 +1,10 @@
 <%-- 
-    Document   : NuevaSolicitud
-    Created on : 25/09/2014, 08:19:19 PM
-    Author     : user
+    Document   : index
+    Created on : 25-sep-2014, 19:25:56
+    Author     : Gerson pineda
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%//este codigo es para que solo se acceda a esta pagina si ya se coloco el user y pass
-    HttpSession sesion = request.getSession();
-    if (sesion.getAttribute("TipoSesion") != null) {
-        if (session.getAttribute("TipoSesion").equals("UsuarioEntidad")) {
-%>
-<jsp:forward page="/entidad" />
-<%    }
-} else {
-%>
-<jsp:forward page="/login" />
-<%    }
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,54 +12,60 @@
         <title>JSP Page</title>
 
         <script >
-            
-            function validacion(){
+
+            function validacion() {
                 var Password = document.getElementById("Password").value;
                 var Pass = document.getElementById("Pass").value;
-            
-                if(Password == Pass){
+                
+                if (Password == Pass) {
                     alert("Contraseñas coinciden");
-               
-                }else{
+
+                } else {
                     alert("Contraseñas no coinciden");
                     document.getElementById("Password").focus();
                     return false;
-                }  
+                }
                 return true;
-            } 
-        
-            function validarNum(){
+            }
+
+            function validarNum() {
                 var valor = document.getElementById("Celular").value;
-                if( !(/^\d{8}$/.test(valor)) ) {
+                if (!(/^\d{8}$/.test(valor))) {
                     alert("Numero Invalido");
                     document.getElementById("Celular").focus();
                     return false;
                 }
-                return true; 
-            } 
-       
-            function validarDom(){
-                var valor = document.getElementById("Domicilio").value;
-                if( !(/^\d{8}$/.test(valor)) ) {
-                    alert("Numero Invalido");
-                    document.getElementById("Domicilio").focus();
-                    return false;
-                }
-                return true; 
-            } 
-       
-            function validarDpi(){
+
+            }
+
+            function validarDpi() {
                 var valor = document.getElementById("DPI").value;
-                if( !(/^\d{8}$/.test(valor)) ) {
+                if (!(/^\d{8}$/.test(valor))) {
                     alert("Numero Invalido");
                     document.getElementById("DPI").focus();
                     return false;
                 }
-                return true; 
-            } 
-       
-       
-           
+
+            }
+
+            function ValidarCodigoE() {
+                var valor = document.getElementById("CodigoE").value;
+                if (isNaN(valor)) {
+                    return false;
+                }
+            }
+            function ValidarDom() {
+                var valor = document.getElementById("Domicilio").value;
+                if (!(/^\d{8}$/.test(valor))) {
+                    alert("Numero Invalido");
+                    document.getElementById("Domicilio").focus();
+                    return false;
+                }
+
+            }
+
+
+
         </script>
 
 
@@ -141,29 +135,30 @@
     </head>
     <body>
 
-        <%
-            //aca donde dice action pones la direccion de la pagina que va a procesar 
+        <%            //aca donde dice action pones la direccion de la pagina que va a procesar 
             //los datos llegados del formulario y los va a ingresar a la base de datos!.
             //entonces le voy a poner la direccion /org/user/nuevo/procesando pa que se vea bonito, jaja
             //pero esta pagina no existe!!, por eso es necesaria mapear esta direccion hacia
             //tu servlet que procesa la info. este mapeo se hace en el archivo web.xml o
             //directamente en el servlet. en este caso como lo tenes en tu servlet lo voy
             //a modificar ahi.
-%>
-        <h1><center>Nuevo Angel</center></h1>
-
-
+        %>
+        <h1><center>Nueva Entidad</center></h1>
 
         <div id="formulario">
             <div id="f">
 
-                <form action = "nuevo/procesando" method="post"  >  
-                    <div name="DatosAngel" class="div-form">
+                <form action = "UsuarioEnt" method="post"  >  
+                    <div name="DatosEntidad" class="div-form">
                         <h3>Ingresar Datos del Usuario:</h3>
+
+                        
+                        <label>Codigo Entidad</label>
+                        <input type="text" name="CodigoE" id="CodigoE" required onblur="ValidarCodigoE()"  placeholder="Ingrese Codigo Entidad"/>
                         <label>DPI:</label>
-                        <input type="text" name="DPI" id="DPI" onblur="validarDpi()" required placeholder="Escriba aqui su Dpi"/>
+                        <input type="text" name="DPI"id="DPI" onblur ="validarDpi()" required placeholder="Escriba aqui su Dpi"/>
                         <label>Nombre:</label>
-                        <input type="text" name="Nombre" required   placeholder="Escriba aqui su Nombre"/>
+                        <input type="text" name="Nombre" required placeholder="Escriba aqui su Nombre"/>
                         <label>Apellido Paterno:</label>
                         <input type="text" name="ApellidoP" required placeholder="Escriba aqui su ApellidoP"/>
                         <label>Apellido Materno:</label>
@@ -175,28 +170,26 @@
                         <label>Password:</label>
                         <input type="Password" name="Password" id="Password" required placeholder="Escriba aqui su Pass" />
                         <label>Repita su Password:</label>
-                        <input type="Password" name="Pass" id="Pass" onblur="validacion()" required placeholder="Escriba aqui su Pass" />
+                        <input type="Password" name="Pass" id="Pass"  onblur="validacion()" required placeholder="Escriba aqui su Pass" />
                         <label>Celular:</label>
-                        <input type="text" name="Celular" id="Celular" onblur="validarNum()" required  placeholder="Escriba aqui su Celular"/>
+                        <input type="text" name="Celular" id="Celular" required onblur="validarNum()" placeholder="Escriba aqui su Celular"/>
                         <label>Domicilio:</label>
-                        <input type="text" name="Domicilio" id="Domicilio" onblur="validarDom()" required placeholder="Escriba aqui su Domicilio"/>
+                        <input type="text" name="Domicilio" id="Domicilio" onblur="ValidarDom" required placeholder="Escriba aqui su Domicilio"/>
 
                         <label>Tipo de Usuario:</label>
-                        <select name="TipoUser" >
+                        <select name="TipoUser">
                             <option value="1">Admin</option>
                             <option value="2">Normal</option>
                         </select>
 
-
-                        <input type="Submit" name="Nuevo Angel" /> 
+                        <input type="Submit" name="Nuevo Usuario Entidad"   /> 
                     </div> 
 
                 </form> 
 
                 <footer >
                     <br><br><br>
-                    Desarrollado por Brandon!<br>
-                    Sitio Web desarrollado en Java.
+                    Desarrollado por Gerson!<br>
                 </footer>
 
                 </body>
